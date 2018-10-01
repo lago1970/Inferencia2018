@@ -1,0 +1,92 @@
+---
+title: "Estatística Inferencial"
+author: "Professor Eduardo Monteiro de Castro Gomes"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Distribuições de probabilidade
+
+Considere que um levantamento de dados foi realizado e foram registradas as alturas em centímetros de um determinado grupo de pessoas.
+
+```{r}
+set.seed(123)
+alturas <- round(rnorm(100,170,10))
+tabela <- (prop.table(table(cut(alturas,breaks = c(145,150,155,160,165,170,175,180,185,190,195)))))
+kable(tabela,col.names = c("Alturas","Frequências relativas"))
+```
+
+De que forma pode-se representar essas alturas em um gráfico?
+
+```{r}
+hist(alturas,breaks = c(145,150,155,160,165,170,175,180,185,190,195),freq=FALSE)
+```
+
+É possível determinar a proporção de pessoas com menos de 160 cm com base na área do gráfico?
+
+
+Os modelos de probabilidade permitem aproximar ou representar a distribuição de uma determinada variável. O modelo mais conhecido e utilizado é a distribuição Normal de probabilidades. Perceba a aproximação das alturas por uma distribuição Normal
+
+```{r}
+xx <- seq(min(alturas)-5,max(alturas)+5,by=.1)
+hist(alturas,breaks = c(145,150,155,160,165,170,175,180,185,190,195),freq = FALSE)
+media <- mean(alturas)
+desviopad <- sd(alturas)
+lines(xx,dnorm(xx,media,desviopad),col=2)
+```
+
+Para o cálculo de probabilidades referentes a um modelo contínuo de probabilidade deve-se calcular a área sob a curva. A ferramenta matemática utilizada para calcular essas áreas é a integral. Dada a complexidade de muitos dos principais modelos de probabilidade a resolução analítica das integrais não é possível e portanto técnicas numéricas são utilizadas e tabelas são criadas para o cálculo de probabilidades envolvendo esses modelos. 
+
+A utilização das atuais ferramentas computacionais dispensa o uso de tabelas. Em linguagem R para se calcular probabilidades referentes a distribuição Normal utiliza-se a função _pnorm_.
+
+Em nosso exemplo das alturas, suponha que uma pessoa será selecionada para realizar exames adicionais. 
+
+* Qual a probabilidade que a pessoa selecionada tenha menos de 160 cm? $P(X\leq160)$
+
+```{r,echo=TRUE}
+pnorm(160, mean = media,sd = desviopad )
+```
+
+* Qual a probabilidade que a pessoa selecionada tenha mais de 180 cm? $P(X \geq 180)$
+```{r,echo=TRUE}
+1 - pnorm(180,mean = media, sd = desviopad)
+```
+
+* Qual a probabilidade que a pessoa selecionada tenha entre 165 e 175 cm? $P(165 \leq X \leq 175)$
+```{r,echo=TRUE}
+pnorm(175,mean = media, sd = desviopad) - pnorm(165,mean = media, sd = desviopad)
+```
+
+#### Distribuição T-student
+
+#### Distribuição Qui-quadrado
+
+#### Distribuição F
+
+
+## Distribuições amostrais
+
+```{r}
+pop1 <- runif(10000)
+hist(pop1)
+medpop1 <- c()
+for(i in 1:100){
+  medpop1[i] <- mean(sample(x =  pop1, size = 30))
+}
+hist(medpop1)
+```
+```{r}
+pop1 <- rexp(10000,rate = .3)
+hist(pop1)
+medpop1 <- c()
+for(i in 1:100){
+  medpop1[i] <- mean(sample(x =  pop1, size = 30))
+}
+hist(medpop1)
+```
+
