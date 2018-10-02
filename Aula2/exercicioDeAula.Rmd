@@ -1,0 +1,98 @@
+---
+title: "Exercícios de Aula"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
+```
+
+Estes exercícios tem como objetivo revisar os conceitos de probabilidades, distribuição amostral da média e intervalo de confiança para a média. Após um intervalo de tempo para que os alunos possam pensar nos conceitos e propor soluções para os exercícios ($\pm 15$ minutos) haverá uma discução em sala sobre a resolução dos exercícios e os temas envolvidos. 
+
+
+##### Questão 1
+Considerando uma variável $Y$ com distribuição Normal tendo média $\mu=3.7$ e desvio padrão $\sigma=1$ calcule as seguintes probabilidades:
+
+* $P(Y \leq 3.5)$
+
+* $P(Y \geq 3.8)$
+
+* $P(3 \leq Y \leq4)$
+
+* Encontre o valor de $k$ tal que $P(Y \leq k )=0.95$
+
+```{r}
+pnorm(q = 3.5, mean = 3.7, sd = 1)
+1 - pnorm(q = 3.8, mean = 3.7, sd = 1)
+pnorm(q = 4, mean = 3.7, sd = 1) - pnorm(q = 3, mean = 3.7, sd = 1)
+qnorm(p = .95, mean = 3.7,sd = 1)
+```
+
+##### Questão 2
+Considerando uma variável $T$ com distribuição T-student com $gl=25$ graus de liberdade calcule as seguintes probabilidades:
+
+* $P(T > 1)$
+
+* $P(T < -1.22)$
+
+* Encontre o valor de $k$ tal que $P(T>k)=0.025$
+
+```{r}
+1 - pt(q = 1, df = 25)
+pt(q = -1.22, df = 25)
+qt(p = .975, df = 25)
+```
+
+
+##### Questão 3
+Considerando uma população com média 100 e variância 25 e a utilização de uma amostra de tamanho 30 dessa população e a média $\bar{X}$ dessa amostra, calcule as probabilidades:
+
+* $P(\bar{X}>101)$
+
+* $P(\bar{X}<98)$
+
+* Encontre o valor de k tal que $P(\bar{X}>k)=0,90$
+
+```{r}
+1 - pnorm((101-100)/sqrt(25/30))
+pnorm((98-100)/sqrt(25/30))
+qnorm(.1) * sqrt(25/30) + 100
+```
+**Dica:** $Z=\frac{\bar{X}-\mu}{\sqrt{\frac{\sigma^2}{n}}}$ e $Z$ tem distribuição Normal $\mu=0$ $\sigma=1$
+
+##### Questão 4
+Use o código abaixo para selecionar uma amostra de uma população de interesse
+
+```{r,echo=TRUE, eval=TRUE}
+set.seed(987)
+amostra <- round( rnorm(n = 20, mean = 1500, sd = 50) , 2)
+amostra
+```
+
+Faça um histograma e calcule um intervalo de $90\%$ confiança para a média da população com base a amostra obtida.
+
+```{r}
+media <- mean(amostra)
+variancia <- var(amostra)
+tgamma <- qt(.95, 19)
+media - tgamma * sqrt(variancia/20)
+media + tgamma * sqrt(variancia/20)
+hist(amostra)
+```
+
+
+
+**Dica** $P(\bar{X}-t_{\gamma}\sqrt{\frac{s^2}{n}}<\mu<\bar{X}+t_{\gamma}\sqrt{\frac{s^2}{n}})=\gamma$ assim IC= $\bar{X}\pm t_{\gamma}\sqrt{\frac{s^2}{n}}$
+
+### Funções úteis para estes exercícios:
+
+* pnorm
+* qnorm
+* pt
+* qt
+* mean
+* var
+* hist
+
+
+_O documento fonte que gerou este arquivo e com a resolução dos exercícios está disponível em nossa página do curso_
