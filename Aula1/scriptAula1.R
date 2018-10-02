@@ -65,7 +65,7 @@ intervalos <- matrix(0,nrow=1000,ncol=2)
 for(i in 1:1000){
   intervalos[i,] <- c(medias_amostrais[i]-1.96*sqrt(variancia/30),medias_amostrais[i]+1.96*sqrt(variancia/30))
 }
-intervalos
+#intervalos
 resultado <- c()
 for(i in 1:1000){
   resultado[i] <- intervalos[i,1] < mediapop & intervalos[i,2] > mediapop

@@ -7,7 +7,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 ```
 
-Estes exercícios tem como objetivo revisar os conceitos de probabilidades, distribuição amostral da média e intervalo de confiança para a média. Após um intervalo de tempo para que os alunos possam pensar nos conceitos e propor soluções para os exercícios ($\pm 15$ minutos) haverá uma discução em sala sobre a resolução dos exercícios e os temas envolvidos. 
+Estes exercícios tem como objetivo revisar os conceitos de probabilidades, distribuição amostral da média e intervalo de confiança para a média. Após um intervalo de tempo para que os alunos possam pensar nos conceitos e propor soluções para os exercícios ($\pm 15$ minutos) haverá uma discussão em sala sobre a resolução dos exercícios e os temas envolvidos. 
 
 
 ##### Questão 1
@@ -78,6 +78,7 @@ tgamma <- qt(.95, 19)
 media - tgamma * sqrt(variancia/20)
 media + tgamma * sqrt(variancia/20)
 hist(amostra)
+t.test(amostra,conf.level = .9)
 ```
 
 
@@ -95,4 +96,4 @@ hist(amostra)
 * hist
 
 
-_O documento fonte que gerou este arquivo e com a resolução dos exercícios está disponível em nossa página do curso_
+_O arquivo fonte que gerou este documento e com a resolução dos exercícios está disponível em nossa página do curso_
