@@ -1,0 +1,26 @@
+---
+title: "Exercício de Aula"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Use o comando abaixo para fazer a importação de dados para o ambiente R:
+
+```{r}
+dados <- read.table(
+  "https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula3/climaBsb.csv",
+  sep=",", header = TRUE)
+```
+
+Os dados são referentes a uma amostra registros climáticos da estação automática de Brasília ao longo do mês de Setembro de 2018. 
+
+Registros históricos indicam que a média de temperatura para o mês de Setembro em Brasília é de 23 graus. Com os dados de 2018 é possível dizer que a média de temperatura aumentou?
+
+ * Apresente as hipóteses consideradas, o p-valor e a conclusão obtida
+ * Caso a nova média de temperatura seja de 24 graus, qual a probabilidade que o teste não seja capaz de detectar esse aumento?
+ * Apresente um intervalo de confiança de $90\%$ para a média de temperatura em Setembro de 2018.
+ 
+#### Dica: para acessar as informações de temperatura utilize dados$temp_inst*
