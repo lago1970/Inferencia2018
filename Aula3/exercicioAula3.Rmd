@@ -1,0 +1,70 @@
+---
+title: "Exercicio aula 3"
+output: html_document
+---
+
+Primeiramente vou importar os dados:
+
+```{r}
+dados <- read.table(
+  "https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula3/climaBsb.csv",
+  sep=",",header = TRUE)
+```
+
+Para verificar se a importação foi feita corretamente farei um resumo dos dados:
+
+```{r, echo=FALSE}
+summary(dados)
+```
+
+
+Para avaliar o efeito do aquecimento vou testar:
+
+* $H_0:\mu \leq 23$
+* $H_A:\mu > 23$
+
+Vou resolver manualmente
+
+```{r}
+media <- mean(dados$temp_inst)
+variancia <- var(dados$temp_inst)
+tobs <- (media-23)/sqrt(variancia/50)
+```
+O valor do t observado foi `r  tobs` e o pvalor é obtido por:
+
+```{r}
+1 - pt(tobs,49)
+```
+
+Para conferir os resultados manuais 
+```{r}
+t.test(dados$temp_inst,alternative = "greater", mu = 23)
+```
+
+Considerando que vamos usar $\alpha=0,05$ e o pvalor foi superior então não rejeitamos a hipótese nula.
+
+
+###Item 2
+
+Preciso determinar meu valor crítico
+
+```{r}
+tcrit <- qt(.95,49)
+xcrit <- tcrit * sqrt(variancia/50) + 23
+xcrit
+```
+
+Aplicando a transformação e calculando a probabilidade
+
+```{r}
+ttransf <- (xcrit-24)/sqrt(variancia/50)
+pt(ttransf,49)
+pnorm(ttransf)
+```
+
+##Item 3 intervalo de confiança
+```{r}
+t.test(dados$temp_inst,alternative = "two.sided", mu = 23,conf.level = .9)
+
+```
+
