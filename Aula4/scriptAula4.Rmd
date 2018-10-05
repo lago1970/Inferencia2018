@@ -1,0 +1,53 @@
+---
+title: "Exercício de Aula"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Questão 1
+
+Em nossa página do curso na pasta da aula 4 temos dois conjuntos de dados de amostras aleatórias de clima em Brasília (climaBsb.csv) e Goiânia (climaGyn.csv) nos meses de Setembro. Faça a importação dos dados e realize testes de comparação de média para comparar o clima nas duas cidades. Defina as hipóteses que serão testadas, apresente os resultados e as conclusões obtidas.
+
+* Exemplo dos dados de GYN
+```{r}
+gyn <- read.csv("https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula4/climaGyn.csv")
+kable(head(gyn[,1:6]))
+```
+
+* Exemplo dos dados de BSB
+```{r}
+bsb <- read.csv("https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula4/climaBsb.csv")
+kable(head(bsb[,1:6]))
+```
+
+```{r}
+var.test(bsb$temp_inst,gyn$temp_inst)
+t.test(bsb$temp_inst,gyn$temp_inst,
+       paired = FALSE,var.equal = TRUE,
+       alternative = "greater")
+boxplot(data.frame(bsb$temp_inst,gyn$temp_inst))
+```
+
+
+### Questão 2
+
+O conjunto de dados climaCidades.txt apresenta amostras de temperatura coletadas simultâneamente nas cidades de Brasília e Goiânia durante o mês de Setembro. Faça a importação dos dados e realize testes de comparação de média para comparar o clima nas duas cidades. Defina as hipóteses que serão testadas, apresente os resultados e as conclusões obtidas.
+
+
+* Exemplo dos dados
+
+```{r}
+cidades <- read.table("https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula4/climaCidades.txt",sep=";",header = TRUE)
+kable(head(cidades))
+```
+
+
+```{r}
+t.test(cidades$temp_inst,cidades$temp_inst._gyn,
+       alternative = "less",paired = TRUE )
+```
+
