@@ -1,0 +1,23 @@
+---
+title: "Exercício de aula"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Prezados alunos, por favor respondam uma breve avaliação sobre o curso. O formulário está disponível no link:
+
+[Questionário de avaliação](https://goo.gl/forms/tcjK7W8mDpZ7bEDn1) https://goo.gl/forms/tcjK7W8mDpZ7bEDn1
+
+O questionário é anônimo para garantir liberdade aos respondentes.
+
+Considerando os dados de clima de Brasília, disponível na pasta da aula 4, determine qual a melhor variável para modelar e fazer previsões sobre a temperatura. Faça gráficos de dispersão e ajuste modelos de regressão simples para determinar o modelo com maior poder explicativo.
+
+```{r}
+bsb <- read.csv("https://raw.githubusercontent.com/cursoRunb/Inferencia2018/master/Aula4/climaBsb.csv")
+names(bsb)
+```
+
